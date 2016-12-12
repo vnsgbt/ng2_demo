@@ -11,9 +11,9 @@ import { HeroService} from './hero.service'
 
 export class DashboardComponent implements OnInit {
     heroes: Hero[] = []
-    constructor(private HeroService: HeroService) {}
+    constructor(private heroService: HeroService) {}
     ngOnInit(): void {
-        this.HeroService.getHeroes()
+        this.heroService.getHeroes()
         .then(heroes => this.heroes = heroes.slice(1, 5))
     }
 }
