@@ -9,7 +9,7 @@ import { Hero } from './hero'
 @Component({
   moduleId: module.id,
   selector: 'my-hero-detail',
-  templateUrl: 'hero-detail.component.html',
+  templateUrl: 'partial/hero-detail.component.html',
   styleUrls: ['partial/hero-detail.component.css']
 })
 
@@ -22,13 +22,18 @@ export class HeroDetailComponent implements OnInit {
       private location: Location 
     ){}
 
-    ngOnInit():void {
+    ngOnInit() {
       this.route.params
       .switchMap((params: Params)=> this.heroService.getHero(+params['id']))
       .subscribe(hero => this.hero = hero)
     }
 
-    goBack(): void {
+    goBack() {
       this.location.back()
+    }
+
+    save() {
+      this.heroService.update(this.hero)
+        .then(()=>this.goBack())
     }
 }
